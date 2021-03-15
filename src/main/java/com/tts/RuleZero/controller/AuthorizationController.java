@@ -1,5 +1,7 @@
 package com.tts.RuleZero.controller;
 
+import com.tts.RuleZero.model.User;
+import com.tts.RuleZero.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

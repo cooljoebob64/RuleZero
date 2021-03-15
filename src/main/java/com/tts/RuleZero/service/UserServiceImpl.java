@@ -1,5 +1,9 @@
 package com.tts.RuleZero.service;
 
+import com.tts.RuleZero.model.Role;
+import com.tts.RuleZero.model.User;
+import com.tts.RuleZero.repository.RoleRepository;
+import com.tts.RuleZero.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

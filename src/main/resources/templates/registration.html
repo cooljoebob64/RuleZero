@@ -10,16 +10,6 @@
         <h2>Sign up</h2>
         <form th:unless="${success}" th:action="@{/signup}" th:object="${user}" method="post" autocomplete="off">
             <div class="form-group">
-                <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
-                       class="validation-message"></label>
-                <input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                       class="validation-message"></label>
-                <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control"/>
-            </div>
-            <div class="form-group">
                 <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
                        class="validation-message"></label>
                 <input type="text" th:field="*{username}" placeholder="Username" class="form-control"/>
@@ -48,6 +38,6 @@
     </div>
 </div>
 
-<div th:replace="fragments/stylesFragment :: body-styles"></div>
+<div th:replace="fragments/stylesFragment :: body-scripts"></div>
 </body>
 </html>
