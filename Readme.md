@@ -4,3 +4,4 @@
 * Joshua Luppes
 * Megan Lowe
 * Keya Daniel
+* Ryan Kirk
