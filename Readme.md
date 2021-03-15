@@ -1,3 +1,5 @@
-Rule Zero
+# Rule Zero
 
-*Megan Lowe
+## Group Members:
+* Joshua Luppes
+* Megan Lowe
