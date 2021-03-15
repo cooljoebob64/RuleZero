@@ -463,3 +463,4 @@ Temporary Items
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/java,react,reactnative,intellij,visualstudiocode
+/src/main/resources/application.properties
