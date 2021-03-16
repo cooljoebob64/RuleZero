@@ -2,7 +2,9 @@ package com.tts.RuleZero.controller;
 
 import com.tts.RuleZero.config.SwaggerConfig;
 import com.tts.RuleZero.model.Deck;
+import com.tts.RuleZero.model.DeckDisplay;
 import com.tts.RuleZero.repository.DeckRepository;
+import com.tts.RuleZero.service.DeckService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -28,26 +30,32 @@ public class DeckController {
     @Autowired
     DeckRepository deckRepository;
 
+    @Autowired
+    DeckService deckService;
+
     @GetMapping("/")
     @ApiOperation(value = "Get the list of all decks", response = Deck.class, responseContainer = "List")
     @ApiResponses(value = {
             @ApiResponse(code = 302, message = "Found - Provided the list of decks")
     })
-    public ResponseEntity<List<Deck>> getDeckList() {
-        List<Deck> deckList = (List<Deck>) deckRepository.findAll();
+    public ResponseEntity<List<DeckDisplay>> getDeckList() {
+        List<DeckDisplay> deckList = deckService.findAll();
         return new ResponseEntity<>(deckList, HttpStatus.FOUND);
     }
 
-    @GetMapping("/{id}")
-    @ApiOperation(value = "Get a specific deck by providing its id number", response = Deck.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 302, message = "Found - Provided the deck requested"),
-            @ApiResponse(code = 404, message = "Not Found - No deck with the specified id was found")
-    })
-    public ResponseEntity<Deck> getDeck(@PathVariable(value = "id") Long id) {
-        Optional<Deck> deck = deckRepository.findById(id);
-        return deck.map(value -> new ResponseEntity<>(value, HttpStatus.FOUND)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+//    @GetMapping(value="/{id}")
+//    @ApiOperation(value = "Get a specific deck by providing its id number", response = Deck.class)
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 302, message = "Found - Provided the deck requested"),
+//            @ApiResponse(code = 404, message = "Not Found - No deck with the specified id was found")
+//    })
+//    public ResponseEntity<Deck> getDeck(@PathVariable(value = "id") Long id) {
+//        Optional<Deck> deck = deckRepository.findById(id);
+//        if (deck.isPresent()) {
+//            return new ResponseEntity<>(deck.get(), HttpStatus.FOUND);
+//        } else
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
 
 
 }
