@@ -3,11 +3,12 @@ package com.tts.RuleZero.model;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -17,7 +18,13 @@ public class Deck {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "deck_id")
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User user;
 
     private String title;
 
@@ -29,8 +36,17 @@ public class Deck {
 
     private String[] colors;
 
-//    private List<Card> cardList;
-//
-//    private List<Quality> qualityList;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "deck_card", joinColumns = @JoinColumn(name = "deck_id"),
+            inverseJoinColumns = @JoinColumn(name = "card_id"))
+    private List<Card> cards;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "deck_quality", joinColumns = @JoinColumn(name = "deck_id"),
+            inverseJoinColumns = @JoinColumn(name = "quality_id"))
+    private List<Quality> qualities;
+
+    @CreationTimestamp
+    private Date createdAt;
 
 }
