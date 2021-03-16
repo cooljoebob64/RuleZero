@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Data
 @Entity
@@ -48,5 +49,31 @@ public class Deck {
 
     @CreationTimestamp
     private Date createdAt;
+
+
+    public String[] getColors(String colorInput) {
+        StringBuilder colorOutput = new StringBuilder();
+
+        for (int i = 0; i < colorInput.length(); i++) {
+            if (!colorOutput.toString().contains("" + colorInput.charAt(i))) {
+                colorOutput.append(colorInput.charAt(i));
+            }
+        }
+
+        String[] newColorBlock = new String[colorOutput.length()];
+        for(int i=0;i<colorOutput.length();i++){
+            newColorBlock[i] = String.valueOf(colorOutput.charAt(i)).toUpperCase(Locale.ROOT);
+        }
+
+        return newColorBlock;
+    }
+
+    public void setColors(String colors){
+        this.colors = getColors(colors);
+    }
+
+    public void setColors(String[] colors){
+        this.colors = colors;
+    }
 
 }

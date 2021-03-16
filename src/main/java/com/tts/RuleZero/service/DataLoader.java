@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataLoader implements ApplicationRunner {
 
-    private RoleRepository roleRepository;
-    private DeckRepository deckRepository;
-    private UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final DeckRepository deckRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public DataLoader(RoleRepository roleRepository, DeckRepository deckRepository, UserRepository userRepository) {
@@ -34,7 +34,13 @@ public class DataLoader implements ApplicationRunner {
         demoDeck.setUser(demoUser);
         demoDeck.setTitle("Demo Deck");
         demoDeck.setDescription("This is a demo deck!");
-        demoDeck.setColors(new String[]{"W", "B", "G"});
+        demoDeck.setColors("RU");
+        deckRepository.save(demoDeck);
+        demoDeck = new Deck();
+        demoDeck.setUser(demoUser);
+        demoDeck.setTitle("Demo Deck 2");
+        demoDeck.setDescription("This is a different demo deck!");
+        demoDeck.setColors(new String[]{"W", "R", "U"});
         deckRepository.save(demoDeck);
     }
 }
