@@ -35,7 +35,7 @@ public class Deck {
 
     private String deckImage;
 
-    private String[] colors;
+    private String colors;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "deck_card", joinColumns = @JoinColumn(name = "deck_id"),
@@ -51,7 +51,7 @@ public class Deck {
     private Date createdAt;
 
 
-    public String[] getColors(String colorInput) {
+    public String getColors(String colorInput) {
         StringBuilder colorOutput = new StringBuilder();
 
         for (int i = 0; i < colorInput.length(); i++) {
@@ -60,20 +60,11 @@ public class Deck {
             }
         }
 
-        String[] newColorBlock = new String[colorOutput.length()];
-        for(int i=0;i<colorOutput.length();i++){
-            newColorBlock[i] = String.valueOf(colorOutput.charAt(i)).toUpperCase(Locale.ROOT);
-        }
-
-        return newColorBlock;
+        return colorOutput.toString();
     }
 
     public void setColors(String colors){
         this.colors = getColors(colors);
-    }
-
-    public void setColors(String[] colors){
-        this.colors = colors;
     }
 
 }

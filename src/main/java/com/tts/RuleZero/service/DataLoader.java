@@ -29,18 +29,12 @@ public class DataLoader implements ApplicationRunner {
         roleRepository.save(new Role((long)1, "USER"));
         roleRepository.save(new Role((long)2, "ADMIN"));
 
-        User demoUser = userRepository.findById((long)3).get();
+        User demoUser = userRepository.findById((long)1).get();
         Deck demoDeck = new Deck();
         demoDeck.setUser(demoUser);
         demoDeck.setTitle("Demo Deck");
         demoDeck.setDescription("This is a demo deck!");
         demoDeck.setColors("RU");
-        deckRepository.save(demoDeck);
-        demoDeck = new Deck();
-        demoDeck.setUser(demoUser);
-        demoDeck.setTitle("Demo Deck 2");
-        demoDeck.setDescription("This is a different demo deck!");
-        demoDeck.setColors(new String[]{"W", "R", "U"});
         deckRepository.save(demoDeck);
     }
 }
