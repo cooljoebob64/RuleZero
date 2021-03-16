@@ -13,7 +13,6 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
-@Builder
 public class Deck {
 
     @Id
@@ -30,8 +29,8 @@ public class Deck {
 
     private String[] colors;
 
-    private List<Card> cardList;
-
-    private List<Quality> qualityList;
+//    private List<Card> cardList;
+//
+//    private List<Quality> qualityList;
 
 }
