@@ -6,6 +6,8 @@ import {Icon} from 'react-native-elements';
 import Build from './Build';
 import Settings from './Settings';
 
+
+
 class Home extends Component{
     render() {
         return(
