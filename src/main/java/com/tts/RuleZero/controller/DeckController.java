@@ -3,7 +3,9 @@ package com.tts.RuleZero.controller;
 import com.tts.RuleZero.config.SwaggerConfig;
 import com.tts.RuleZero.model.Deck;
 import com.tts.RuleZero.model.DeckDisplay;
+import com.tts.RuleZero.model.User;
 import com.tts.RuleZero.repository.DeckRepository;
+import com.tts.RuleZero.repository.UserRepository;
 import com.tts.RuleZero.service.DeckService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,14 +35,33 @@ public class DeckController {
     @Autowired
     DeckService deckService;
 
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping("/")
-    @ApiOperation(value = "Get the list of all decks", response = Deck.class, responseContainer = "List")
+    @ApiOperation(value = "Get the list of all decks", response = DeckDisplay.class, responseContainer = "List")
     @ApiResponses(value = {
             @ApiResponse(code = 302, message = "Found - Provided the list of decks")
     })
     public ResponseEntity<List<DeckDisplay>> getDeckList() {
         List<DeckDisplay> deckList = deckService.findAll();
         return new ResponseEntity<>(deckList, HttpStatus.FOUND);
+    }
+
+    @GetMapping(value="/{userId}")
+    @ApiOperation(value = "Get a list of decks by providing a user Id number", response = DeckDisplay.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 302, message = "Found - Provided the decks requested"),
+            @ApiResponse(code = 404, message = "Not Found - No decks with the specified User Id were found")
+    })
+    public ResponseEntity<List<DeckDisplay>> getUserDecks(@PathVariable(value = "userId") Long userId) {
+        Optional<User> selectedUser = userRepository.findById(userId);
+        List<DeckDisplay> decks;
+        if(selectedUser.isPresent()){
+            decks = deckService.findAllByUser(selectedUser.get());
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(decks, HttpStatus.FOUND);
     }
 
 //    @GetMapping(value="/{id}")

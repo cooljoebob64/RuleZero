@@ -2,6 +2,7 @@ package com.tts.RuleZero.service;
 
 import com.tts.RuleZero.model.Deck;
 import com.tts.RuleZero.model.DeckDisplay;
+import com.tts.RuleZero.model.User;
 import com.tts.RuleZero.repository.DeckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,11 @@ public class DeckServiceImpl implements DeckService{
 
     public List<DeckDisplay> findAll(){
         List<Deck> decks = (List)deckRepository.findAll();
+        return formatDecks(decks);
+    }
+
+    public List<DeckDisplay> findAllByUser(User user){
+        List<Deck> decks = deckRepository.findAllByUserOrderByCreatedAtDesc(user);
         return formatDecks(decks);
     }
 
