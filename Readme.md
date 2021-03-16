@@ -5,3 +5,4 @@
 * Megan Lowe
 * Keya Daniel
 * Ryan Kirk
+* Shantel Taylor
