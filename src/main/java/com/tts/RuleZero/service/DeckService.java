@@ -12,4 +12,5 @@ public interface DeckService {
     List<DeckDisplay> findAllByUser(User user);
     Optional<DeckDisplay> findById(Long id);
     void save(Deck deck);
+    Deck addNewDeck(User user);
 }

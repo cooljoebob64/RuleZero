@@ -22,6 +22,13 @@ public class DeckServiceImpl implements DeckService{
         deckRepository.save(deck);
     }
 
+    public Deck addNewDeck(User user){
+        Deck newDeck = new Deck();
+        newDeck.setUser(user);
+        deckRepository.save(newDeck);
+        return newDeck;
+    }
+
     public List<DeckDisplay> findAll(){
         List<Deck> decks = (List)deckRepository.findAll();
         return formatDeckList(decks);

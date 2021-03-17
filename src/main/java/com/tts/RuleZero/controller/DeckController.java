@@ -7,6 +7,7 @@ import com.tts.RuleZero.model.User;
 import com.tts.RuleZero.repository.DeckRepository;
 import com.tts.RuleZero.repository.UserRepository;
 import com.tts.RuleZero.service.DeckService;
+import com.tts.RuleZero.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -34,6 +35,9 @@ public class DeckController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping("/")
     @ApiOperation(value = "Get the list of all decks", response = DeckDisplay.class, responseContainer = "List")
@@ -73,11 +77,20 @@ public class DeckController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    public void addNewEmptyDeck(){}
+    @PostMapping(value = "/newDeck")
+    public ResponseEntity<DeckDisplay> addNewEmptyDeck(){
+        Deck newDeck = deckService.addNewDeck(userService.getLoggedInUser());
+        return new ResponseEntity<>(deckService.findById(newDeck.getId()).get(), HttpStatus.ACCEPTED);
+    }
 
-//    @PutMapping(value="/{id}/update")
-//    public void updateDeck(@RequestBody){}
-//
+    @PutMapping(value="/update")
+    public ResponseEntity<DeckDisplay> updateDeck(@RequestBody Deck deck){
+        if(deckService.findById(deck.getId()).isPresent()) {
+            deckService.save(deck);
+            return new ResponseEntity<>(deckService.findById(deck.getId()).get(), HttpStatus.ACCEPTED);
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
 
 
