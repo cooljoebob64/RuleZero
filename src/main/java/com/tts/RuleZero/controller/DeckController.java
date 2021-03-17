@@ -48,7 +48,7 @@ public class DeckController {
         return new ResponseEntity<>(deckList, HttpStatus.FOUND);
     }
 
-    @GetMapping(value="/{userId}")
+    @GetMapping(value="/user/{userId}")
     @ApiOperation(value = "Get a list of decks by providing a user Id number", response = DeckDisplay.class)
     @ApiResponses(value = {
             @ApiResponse(code = 302, message = "Found - Provided the decks requested"),
@@ -64,19 +64,19 @@ public class DeckController {
         return new ResponseEntity<>(decks, HttpStatus.FOUND);
     }
 
-//    @GetMapping(value="/{id}")
-//    @ApiOperation(value = "Get a specific deck by providing its id number", response = Deck.class)
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 302, message = "Found - Provided the deck requested"),
-//            @ApiResponse(code = 404, message = "Not Found - No deck with the specified id was found")
-//    })
-//    public ResponseEntity<Deck> getDeck(@PathVariable(value = "id") Long id) {
-//        Optional<Deck> deck = deckRepository.findById(id);
-//        if (deck.isPresent()) {
-//            return new ResponseEntity<>(deck.get(), HttpStatus.FOUND);
-//        } else
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
+    @GetMapping(value="/{id}")
+    @ApiOperation(value = "Get a specific deck by providing its id number", response = DeckDisplay.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 302, message = "Found - Provided the deck requested"),
+            @ApiResponse(code = 404, message = "Not Found - No deck with the specified id was found")
+    })
+    public ResponseEntity<DeckDisplay> getDeck(@PathVariable(value = "id") Long id) {
+        Optional<DeckDisplay> deck = deckService.findById(id);
+        if (deck.isPresent()) {
+            return new ResponseEntity<>(deck.get(), HttpStatus.FOUND);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
 }

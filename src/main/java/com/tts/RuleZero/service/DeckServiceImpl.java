@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeckServiceImpl implements DeckService{
@@ -25,9 +26,31 @@ public class DeckServiceImpl implements DeckService{
         return formatDecks(decks);
     }
 
+    public Optional<DeckDisplay> findById(Long id){
+        Optional<Deck> foundDeck = deckRepository.findById(id);
+        if(foundDeck.isPresent()){
+            return formatOneDeck(foundDeck);
+        }
+        return formatOneDeck(foundDeck);
+    }
+
     public List<DeckDisplay> findAllByUser(User user){
         List<Deck> decks = deckRepository.findAllByUserOrderByCreatedAtDesc(user);
         return formatDecks(decks);
+    }
+
+    private DeckDisplay formatOneDeck(Deck deck){
+        DeckDisplay deckDisplay = new DeckDisplay();
+        deckDisplay.setId(deck.getId());
+        deckDisplay.setTitle(deck.getTitle());
+        deckDisplay.setDescription(deck.getDescription());
+        deckDisplay.setCardCount(deck.getCardCount());
+        deckDisplay.setColors(deck.getColors());
+        deckDisplay.setUser(deck.getUser());
+        deckDisplay.setQualities(deck.getQualities());
+        deckDisplay.setCards(deck.getCards());
+        deckDisplay.setDeckImage(deckDisplay.getDeckImage());
+        return deckDisplay;
     }
 
     private List<DeckDisplay> formatDecks(List<Deck> decks){
