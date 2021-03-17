@@ -17,12 +17,14 @@ public class DataLoader implements ApplicationRunner {
     private final RoleRepository roleRepository;
     private final DeckRepository deckRepository;
     private final UserRepository userRepository;
+    private final DeckService deckService;
 
     @Autowired
-    public DataLoader(RoleRepository roleRepository, DeckRepository deckRepository, UserRepository userRepository) {
+    public DataLoader(RoleRepository roleRepository, DeckRepository deckRepository, UserRepository userRepository, DeckService deckService) {
         this.roleRepository = roleRepository;
         this.deckRepository = deckRepository;
         this.userRepository = userRepository;
+        this.deckService = deckService;
     }
 
     public void run(ApplicationArguments args) {
@@ -38,11 +40,11 @@ public class DataLoader implements ApplicationRunner {
         demoUser.setActive(1);
         userRepository.save(demoUser);
 
-        Deck demoDeck = new Deck();
-        demoDeck.setUser(demoUser);
+
+        Deck demoDeck = deckService.addNewDeck(demoUser);
         demoDeck.setTitle("Demo Deck");
         demoDeck.setDescription("This is a demo deck!");
         demoDeck.setColors("RU");
-        deckRepository.save(demoDeck);
+        deckService.save(demoDeck);
     }
 }

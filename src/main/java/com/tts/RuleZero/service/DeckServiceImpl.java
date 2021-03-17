@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeckServiceImpl implements DeckService{
@@ -20,30 +22,51 @@ public class DeckServiceImpl implements DeckService{
         deckRepository.save(deck);
     }
 
+    public Deck addNewDeck(User user){
+        Deck newDeck = new Deck();
+        newDeck.setUser(user);
+        newDeck.setActive(1);
+        deckRepository.save(newDeck);
+        return newDeck;
+    }
+
     public List<DeckDisplay> findAll(){
         List<Deck> decks = (List)deckRepository.findAll();
-        return formatDecks(decks);
+        return formatDeckList(decks);
+    }
+
+    public Optional<DeckDisplay> findById(Long id){
+        Optional<Deck> foundDeck = deckRepository.findById(id);
+        return foundDeck.map(this::formatDeck);
     }
 
     public List<DeckDisplay> findAllByUser(User user){
         List<Deck> decks = deckRepository.findAllByUserOrderByCreatedAtDesc(user);
-        return formatDecks(decks);
+        return formatDeckList(decks);
     }
 
-    private List<DeckDisplay> formatDecks(List<Deck> decks){
+    private DeckDisplay formatDeck(Deck deck){
+        deck.setLastAccessedAt(new Date());
+        DeckDisplay deckDisplay = new DeckDisplay();
+        deckDisplay.setId(deck.getId());
+        deckDisplay.setTitle(deck.getTitle());
+        deckDisplay.setActive(deck.getActive());
+        deckDisplay.setDescription(deck.getDescription());
+        deckDisplay.setCardCount(deck.getCardCount());
+        deckDisplay.setColors(deck.getColors());
+        deckDisplay.setUser(deck.getUser());
+        deckDisplay.setQualities(deck.getQualities());
+        deckDisplay.setCards(deck.getCards());
+        deckDisplay.setDeckImage(deckDisplay.getDeckImage());
+        deckDisplay.setLastUpdatedAt(deck.getLastUpdatedAt());
+        deckDisplay.setLastAccessedAt(deck.getLastAccessedAt());
+        return deckDisplay;
+    }
+
+    private List<DeckDisplay> formatDeckList(List<Deck> decks){
         List<DeckDisplay> response = new ArrayList<>();
         for(Deck deck : decks){
-            DeckDisplay deckDisplay = new DeckDisplay();
-            deckDisplay.setId(deck.getId());
-            deckDisplay.setTitle(deck.getTitle());
-            deckDisplay.setDescription(deck.getDescription());
-            deckDisplay.setCardCount(deck.getCardCount());
-            deckDisplay.setColors(deck.getColors());
-            deckDisplay.setUser(deck.getUser());
-            deckDisplay.setQualities(deck.getQualities());
-            deckDisplay.setCards(deck.getCards());
-            deckDisplay.setDeckImage(deckDisplay.getDeckImage());
-            response.add(deckDisplay);
+            response.add(formatDeck(deck));
         }
         return response;
     }

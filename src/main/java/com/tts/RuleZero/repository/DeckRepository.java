@@ -9,6 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DeckRepository extends PagingAndSortingRepository<Deck, Long> {
-
     List<Deck> findAllByUserOrderByCreatedAtDesc(User user);
 }

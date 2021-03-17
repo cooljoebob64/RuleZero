@@ -1,11 +1,13 @@
 package com.tts.RuleZero.model;
 
+import jdk.jfr.Timestamp;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,6 +31,8 @@ public class Deck {
 
     private String title;
 
+    public int active;
+
     private String description;
 
     private int cardCount;
@@ -50,6 +54,11 @@ public class Deck {
     @CreationTimestamp
     private Date createdAt;
 
+    @UpdateTimestamp
+    private Date lastUpdatedAt;
+
+    @Timestamp
+    private Date lastAccessedAt;
 
     public String getColors(String colorInput) {
         StringBuilder colorOutput = new StringBuilder();
