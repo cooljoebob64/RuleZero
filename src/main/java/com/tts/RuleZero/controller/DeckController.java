@@ -49,7 +49,7 @@ public class DeckController {
         return new ResponseEntity<>(deckList, HttpStatus.FOUND);
     }
 
-    @GetMapping(value="/user/{userId}")
+    @GetMapping(value = "/user/{userId}")
     @ApiOperation(value = "Get a list of decks by providing a user Id number", response = DeckDisplay.class)
     @ApiResponses(value = {
             @ApiResponse(code = 302, message = "Found - Provided the decks requested"),
@@ -58,14 +58,14 @@ public class DeckController {
     public ResponseEntity<List<DeckDisplay>> getUserDecks(@PathVariable(value = "userId") Long userId) {
         Optional<User> selectedUser = userRepository.findById(userId);
         List<DeckDisplay> decks;
-        if(selectedUser.isPresent()){
+        if (selectedUser.isPresent()) {
             decks = deckService.findAllByUser(selectedUser.get());
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         return new ResponseEntity<>(decks, HttpStatus.FOUND);
     }
 
-    @GetMapping(value="/{id}")
+    @GetMapping(value = "/{id}")
     @ApiOperation(value = "Get a specific deck by providing its id number", response = DeckDisplay.class)
     @ApiResponses(value = {
             @ApiResponse(code = 302, message = "Found - Provided the deck requested"),
@@ -78,20 +78,25 @@ public class DeckController {
     }
 
     @PostMapping(value = "/newDeck")
-    public ResponseEntity<DeckDisplay> addNewEmptyDeck(){
+    @ApiOperation(value = "Create a new deck", response = DeckDisplay.class)
+    @ApiResponse(code=202, message = "Accepted - created a new deck and returned it")
+    public ResponseEntity<DeckDisplay> addNewEmptyDeck() {
         Deck newDeck = deckService.addNewDeck(userService.getLoggedInUser());
         return new ResponseEntity<>(deckService.findById(newDeck.getId()).get(), HttpStatus.ACCEPTED);
     }
 
-    @PutMapping(value="/update")
-    public ResponseEntity<DeckDisplay> updateDeck(@RequestBody Deck deck){
-        if(deckService.findById(deck.getId()).isPresent()) {
+    @PutMapping(value = "/update")
+    @ApiOperation(value="Update an existing deck", response = DeckDisplay.class)
+    @ApiResponses({
+            @ApiResponse(code=202, message="Accepted - Changes have been applied to the deck"),
+            @ApiResponse(code=404, message="Not Found - No deck was found with the specified Id")
+    })
+    public ResponseEntity<DeckDisplay> updateDeck(@RequestBody Deck deck) {
+        if (deckService.findById(deck.getId()).isPresent()) {
             deckService.save(deck);
             return new ResponseEntity<>(deckService.findById(deck.getId()).get(), HttpStatus.ACCEPTED);
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
-
 
 
 }
