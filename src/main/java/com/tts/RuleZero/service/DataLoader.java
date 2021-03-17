@@ -31,6 +31,7 @@ public class DataLoader implements ApplicationRunner {
         roleRepository.save(new Role((long)1, "USER"));
         roleRepository.save(new Role((long)2, "ADMIN"));
 
+
         User demoUser = new User();
         demoUser.setId((long)1);
         demoUser.setUsername("DemoUser");
@@ -38,6 +39,7 @@ public class DataLoader implements ApplicationRunner {
         demoUser.setPassword("test123");
         demoUser.setActive(1);
         userRepository.save(demoUser);
+
 
         Deck demoDeck = deckService.addNewDeck(demoUser);
         demoDeck.setTitle("Demo Deck");
