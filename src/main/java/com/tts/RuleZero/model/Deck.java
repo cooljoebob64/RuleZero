@@ -31,6 +31,8 @@ public class Deck {
 
     private String title;
 
+    public int active;
+
     private String description;
 
     private int cardCount;

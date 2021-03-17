@@ -85,7 +85,7 @@ public class DeckController {
         return new ResponseEntity<>(deckService.findById(newDeck.getId()).get(), HttpStatus.ACCEPTED);
     }
 
-    @PutMapping(value = "/update")
+    @PutMapping (value = "/update")
     @ApiOperation(value="Update an existing deck", response = DeckDisplay.class)
     @ApiResponses({
             @ApiResponse(code=202, message="Accepted - Changes have been applied to the deck"),

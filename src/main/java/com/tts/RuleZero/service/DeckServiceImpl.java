@@ -25,6 +25,7 @@ public class DeckServiceImpl implements DeckService{
     public Deck addNewDeck(User user){
         Deck newDeck = new Deck();
         newDeck.setUser(user);
+        newDeck.setActive(1);
         deckRepository.save(newDeck);
         return newDeck;
     }
@@ -49,6 +50,7 @@ public class DeckServiceImpl implements DeckService{
         DeckDisplay deckDisplay = new DeckDisplay();
         deckDisplay.setId(deck.getId());
         deckDisplay.setTitle(deck.getTitle());
+        deckDisplay.setActive(deck.getActive());
         deckDisplay.setDescription(deck.getDescription());
         deckDisplay.setCardCount(deck.getCardCount());
         deckDisplay.setColors(deck.getColors());
