@@ -11,6 +11,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.NoSuchElementException;
+
 @Component
 public class DataLoader implements ApplicationRunner {
 
@@ -26,15 +28,19 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
-        roleRepository.save(new Role((long)1, "USER"));
-        roleRepository.save(new Role((long)2, "ADMIN"));
+        roleRepository.save(new Role((long) 1, "USER"));
+        roleRepository.save(new Role((long) 2, "ADMIN"));
 
-        User demoUser = userRepository.findById((long)1).get();
-        Deck demoDeck = new Deck();
-        demoDeck.setUser(demoUser);
-        demoDeck.setTitle("Demo Deck");
-        demoDeck.setDescription("This is a demo deck!");
-        demoDeck.setColors("RU");
-        deckRepository.save(demoDeck);
+        try {
+            User demoUser = userRepository.findById(1L).orElseThrow();
+            Deck demoDeck = new Deck();
+            demoDeck.setUser(demoUser);
+            demoDeck.setTitle("Demo Deck");
+            demoDeck.setDescription("This is a demo deck!");
+            demoDeck.setColors("RU");
+            deckRepository.save(demoDeck);
+        } catch (NoSuchElementException e) {
+            e.getStackTrace();
+        }
     }
 }
