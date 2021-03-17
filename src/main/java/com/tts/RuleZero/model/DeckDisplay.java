@@ -18,6 +18,8 @@ public class DeckDisplay {
     private String title;
     private String colors;
     private Date createdAt;
+    private Date lastUpdatedAt;
+    private Date lastAccessedAt;
     private String deckImage;
     private String description;
     private int cardCount;

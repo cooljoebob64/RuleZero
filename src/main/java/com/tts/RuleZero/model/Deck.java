@@ -1,5 +1,6 @@
 package com.tts.RuleZero.model;
 
+import jdk.jfr.Timestamp;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,7 +53,10 @@ public class Deck {
     private Date createdAt;
 
     @UpdateTimestamp
-    private Date lastUpdated;
+    private Date lastUpdatedAt;
+
+    @Timestamp
+    private Date lastAccessedAt;
 
     public String getColors(String colorInput) {
         StringBuilder colorOutput = new StringBuilder();

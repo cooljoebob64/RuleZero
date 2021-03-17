@@ -72,10 +72,8 @@ public class DeckController {
     })
     public ResponseEntity<DeckDisplay> getDeck(@PathVariable(value = "id") Long id) {
         Optional<DeckDisplay> deck = deckService.findById(id);
-        if (deck.isPresent()) {
-            return new ResponseEntity<>(deck.get(), HttpStatus.FOUND);
-        } else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return deck.map(deckDisplay -> new ResponseEntity<>(deckDisplay, HttpStatus.FOUND))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 
