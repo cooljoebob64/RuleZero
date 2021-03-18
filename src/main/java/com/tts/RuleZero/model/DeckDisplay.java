@@ -16,8 +16,11 @@ public class DeckDisplay {
     private Long id;
     private User user;
     private String title;
+    private int active;
     private String colors;
     private Date createdAt;
+    private Date lastUpdatedAt;
+    private Date lastAccessedAt;
     private String deckImage;
     private String description;
     private int cardCount;

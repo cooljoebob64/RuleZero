@@ -19,12 +19,14 @@ public class DataLoader implements ApplicationRunner {
     private final RoleRepository roleRepository;
     private final DeckRepository deckRepository;
     private final UserRepository userRepository;
+    private final DeckService deckService;
 
     @Autowired
-    public DataLoader(RoleRepository roleRepository, DeckRepository deckRepository, UserRepository userRepository) {
+    public DataLoader(RoleRepository roleRepository, DeckRepository deckRepository, UserRepository userRepository, DeckService deckService) {
         this.roleRepository = roleRepository;
         this.deckRepository = deckRepository;
         this.userRepository = userRepository;
+        this.deckService = deckService;
     }
 
     public void run(ApplicationArguments args) {
@@ -32,13 +34,20 @@ public class DataLoader implements ApplicationRunner {
         roleRepository.save(new Role((long) 2, "ADMIN"));
 
         try {
-            User demoUser = userRepository.findById(1L).orElseThrow();
-            Deck demoDeck = new Deck();
-            demoDeck.setUser(demoUser);
-            demoDeck.setTitle("Demo Deck");
-            demoDeck.setDescription("This is a demo deck!");
-            demoDeck.setColors("RU");
-            deckRepository.save(demoDeck);
+        User demoUser = new User();
+        demoUser.setId((long)1);
+        demoUser.setUsername("DemoUser");
+        demoUser.setEmail("demo@demo.demo");
+        demoUser.setPassword("test123");
+        demoUser.setActive(1);
+        userRepository.save(demoUser);
+
+
+        Deck demoDeck = deckService.addNewDeck(demoUser);
+        demoDeck.setTitle("Demo Deck");
+        demoDeck.setDescription("This is a demo deck!");
+        demoDeck.setColors("RU");
+        deckService.save(demoDeck);
         } catch (NoSuchElementException e) {
             e.getStackTrace();
         }
