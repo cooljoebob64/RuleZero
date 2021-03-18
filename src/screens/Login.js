@@ -19,7 +19,8 @@ export default function Login(){
                 <Image style={styles.image} source={require("../Assets/logo.png")} />
                 <StatusBar style="auto" />
                 <View style={styles.inputView}>
-                <TextInput style={styles.TextInput}
+                
+               <TextInput style={styles.TextInput}
                     placeholder="Email."
                     placeholderTextColor="#003f5c"
                     onChangeText={(email) => setEmail(email)} />
@@ -38,9 +39,34 @@ export default function Login(){
         <Text style={styles.forgot_button}>New User?</Text>
       </TouchableOpacity>
  
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
+      <Button 
+        title="LOGIN"
+        style={styles.loginBtn} 
+        onPress={() => {
+          async () => {
+            var myHeaders = new Headers();
+              myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+              myHeaders.append("Cookie", "JSESSIONID=0849CC59C6D4CF1F7D175E2F01DAA129");
+
+              var urlencoded = new URLSearchParams();
+              urlencoded.append("username", email);
+              urlencoded.append("password", password);
+
+              var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: urlencoded,
+                redirect: 'follow'
+              };
+
+              fetch("http://localhost:8080/login", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+            }
+          }
+        }>
+      </Button>
     </View>
   );
         }
