@@ -1,0 +1,75 @@
+package com.tts.RuleZero.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import java.util.List;
+
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CardDownload {
+
+    private String id;
+    private String oracle_id;
+    private int[] multiverse_ids;
+    private int mtgo_id;
+    private int tcgplayer_id;
+    private int cardmarket_id;
+    private String name;
+    private String lang;
+    private String released_at;
+    private String uri;
+    private String scryfall_uri;
+    private String layout;
+    private boolean highres_image;
+    private String image_status;
+    private Object image_uris;
+    private String mana_cost;
+    private double cmc;
+    private String type_line;
+    private String oracle_text;
+    private String power;
+    private String toughness;
+    private String[] colors;
+    private String[] color_identity;
+    private String[] keywords;
+    private Object legalities;
+    private String[] games;
+    private boolean reserved;
+    private boolean foil;
+    private boolean oversized;
+    private boolean promo;
+    private boolean reprint;
+    private boolean variation;
+    private String set;
+    private String set_name;
+    private String set_type;
+    private String set_uri;
+    private String set_search_uri;
+    private String scryfall_set_url;
+    private String rulings_uri;
+    private String prints_search_uri;
+    private String collector_number;
+    private boolean digital;
+    private String rarity;
+    private String flavor_text;
+    private String card_back_id;
+    private String artist;
+    private String[] artist_ids;
+    private String illustration_id;
+    private String border_color;
+    private String frame;
+    private String[] frame_effects;
+    private boolean full_art;
+    private boolean textless;
+    private boolean booster;
+    private boolean story_spotlight;
+    private int edhrec_rank;
+    private Object preview;
+    private Object prices;
+    private Object related_uris;
+    private Object purchase_uris;
+
+}
