@@ -13,4 +13,5 @@ public interface DeckService {
     Optional<DeckDisplay> findById(Long id);
     void save(Deck deck);
     Deck addNewDeck(User user);
+    int toggleActive(DeckDisplay deckDisplay);
 }

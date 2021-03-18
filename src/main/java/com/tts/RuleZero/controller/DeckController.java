@@ -65,7 +65,7 @@ public class DeckController {
         return new ResponseEntity<>(decks, HttpStatus.FOUND);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/id/{id}")
     @ApiOperation(value = "Get a specific deck by providing its id number", response = DeckDisplay.class)
     @ApiResponses(value = {
             @ApiResponse(code = 302, message = "Found - Provided the deck requested"),
@@ -73,16 +73,20 @@ public class DeckController {
     })
     public ResponseEntity<DeckDisplay> getDeck(@PathVariable(value = "id") Long id) {
         Optional<DeckDisplay> deck = deckService.findById(id);
-        return deck.map(deckDisplay -> new ResponseEntity<>(deckDisplay, HttpStatus.FOUND))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if(deck.isPresent()){
+            return new ResponseEntity<>(deck.get(), HttpStatus.FOUND);
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+//        return deck.map(deckDisplay -> new ResponseEntity<>(deckDisplay, HttpStatus.FOUND))
+//                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping(value = "/newDeck")
     @ApiOperation(value = "Create a new deck", response = DeckDisplay.class)
-    @ApiResponse(code=202, message = "Accepted - created a new deck and returned it")
+    @ApiResponse(code=201, message = "Created - Created a new deck and returned it")
     public ResponseEntity<DeckDisplay> addNewEmptyDeck() {
         Deck newDeck = deckService.addNewDeck(userService.getLoggedInUser());
-        return new ResponseEntity<>(deckService.findById(newDeck.getId()).get(), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(deckService.findById(newDeck.getId()).get(), HttpStatus.CREATED);
     }
 
     @PutMapping (value = "/update")
@@ -95,6 +99,16 @@ public class DeckController {
         if (deckService.findById(deck.getId()).isPresent()) {
             deckService.save(deck);
             return new ResponseEntity<>(deckService.findById(deck.getId()).get(), HttpStatus.ACCEPTED);
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<DeckDisplay> toggleDeleteDeck(@PathVariable(value = "id") Long id){
+        Optional<DeckDisplay> deleteMeDeck = deckService.findById(id);
+        if(deleteMeDeck.isPresent()){
+            deckService.toggleActive(deleteMeDeck.get());
+            deleteMeDeck = deckService.findById(id);
+            return new ResponseEntity<>(deleteMeDeck.get(), HttpStatus.ACCEPTED);
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
