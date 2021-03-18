@@ -70,4 +70,16 @@ public class DeckServiceImpl implements DeckService{
         }
         return response;
     }
+
+    public int toggleActive(DeckDisplay thisDeck){
+        Optional<Deck> maybeDeck = deckRepository.findById(thisDeck.getId());
+        if(maybeDeck.isPresent()) {
+            Deck deck = maybeDeck.get();
+            if(deck.getActive()==1){
+                deck.setActive(0);
+            } else deck.setActive(1);
+            return deck.getActive();
+        }
+        return 0;
+    }
 }
