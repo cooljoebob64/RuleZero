@@ -7,63 +7,57 @@
 * Ryan Kirk
 * Shantel Taylor
 
-Project name:
-Rule Zero
 
-Description:
-This is a Capstone project created from Software Developers from Tech Talent South that will be implementing the card game Magic via online or moblie devices.
+## Introduction
 
+> This is a Capstone project created by Software Developers from Tech Talent South that will be implementing the card game Magic via online or mobile devices.
 
-Table of contents:
-1.general info:
-2.image:
-3.software:
-4.setup:
-5.features:
-6.inspiration:
+## General info
+> Rule Zero is a magic card based application that will allow users to play cards in via mobile or online. The goal is to implement cards that will help players identify which styles are available.
 
 
-General info:
-add more general info about project;whats the purpose and motivation:
-Rule Zero is a magic card based application that will allow users to play cards in via mobile or online. The goal is to implement cards that will help players identify which styles are available.
+## Images
+> ![(./img/https://c1.scryfall.com/file/scryfall-cards/normal/front/0/f/0fe79ee4-c3f3-4a6b-a967-203ca3b70ee5.jpg?1594736442)]
+
+## Code Samples
+
+> You've gotten their attention in the introduction, now show a few code examples. So they get a visualization and as a bonus, make them copy/paste friendly.
+
+// Will be added later
+
+## Installation
+
+> You will be able to search via online or goggle play store.
+
+## Software used
+
+> S1-Java-https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg
+
+> S2-Spring Boot-https://www.vectorlogo.zone/logos/springio/springio-icon.svg
+
+> S3-React,React Native-https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg,
+https://reactnative.dev/img/header_logo.svg
+
+> S4-Scryfall API-https://scryfall.com/docs/api
+
+> S5-Bootstrap-https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg
+
+## Todo List
+> Get a deployable website for demo
+ 
+## Status
+> This project is under development
 
 
+## Features
+> F1:Implemented through a Third-party API
+> F2:Ability to use via online/mobile
+> F3:Possibly incorporate the IOS device at a later date and time
 
 
-Screenshots:
-![example screenshot](./img/screenshot.png)example:shm-258-pili-pala
+## Inspiration
+> The inspiration for this card game is in reference to the game scryfall- https://scryfall.com/
 
-Sotware used:
-S1-Java
-S2-Spring Boot
-S3-React,React Native
-S4-Scryfall API
-S5-Bootstrap
+## Contact
 
-Setup:
-how to install/setup local enviroment/add link to demo
-You will be able to search online or goggle playstore.
-
-Code examples:
-show if we have
-
-Features:
-list of features ready and todos for future development:
-F1:Implemented thru a Third-party API
-F2:Ability to use via mobile/online
-F3:Possibly incorporate the IOS device at a later date and time
-
-To-do list:
-1.Get a deployable webiste for demo
-
-Status:
-make reference if in progress,finished or no longer available and why?
-This project is under development
-
-Inspiration:
-The inspiration for this card game is in reference to the game scryfall- https://scryfall.com/
-
-Contact:
-Created by:
-
-
+## Created by
