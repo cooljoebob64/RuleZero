@@ -34,11 +34,12 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
+
+        try {
+
         Role userRole = new Role((long) 1, "USER");
         roleRepository.save(userRole);
         roleRepository.save(new Role((long) 2, "ADMIN"));
-
-        try {
 
         User demoUser = new User();
         demoUser.setId((long)1);
