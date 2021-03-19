@@ -18,12 +18,16 @@
 
 ## Images
 > ![(./img/https://c1.scryfall.com/file/scryfall-cards/normal/front/0/f/0fe79ee4-c3f3-4a6b-a967-203ca3b70ee5.jpg?1594736442)]
+> 
+> ![(./img/https://c1.scryfall.com/file/scryfall-cards/normal/front/f/a/faba010d-5b1b-4562-91d6-ec55303c4dcd.jpg?1559959445)]
+> 
+> ![(./img/https://c1.scryfall.com/file/scryfall-cards/large/front/0/5/059227f9-f6d7-45ab-8398-35e97b677a08.jpg?1562730811)]
 
 ## Code Samples
 
-> You've gotten their attention in the introduction, now show a few code examples. So they get a visualization and as a bonus, make them copy/paste friendly.
+> example here
 
-// Will be added later
+
 
 ## Installation
 
