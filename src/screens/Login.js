@@ -15,18 +15,18 @@ export default function Login(){
         const [password, setPassword] = useState("");
 
         return(
-            <View style={styles.container}>
-                <Image style={styles.image} source={require("../Assets/logo.png")} />
-                <StatusBar style="auto" />
-                <View style={styles.inputView}>
+    <View style={styles.container}>
+      <Image style={styles.image} source={require("../Assets/logo.png")} />
+      <StatusBar style="auto" />
+               <View style={styles.inputView}>
                 
                <TextInput style={styles.TextInput}
                     placeholder="Email."
                     placeholderTextColor="#003f5c"
                     onChangeText={(email) => setEmail(email)} />
-                </View>
+              </View>
 
-                <View style={styles.inputView}>
+    <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
           placeholder="Password."
@@ -34,7 +34,14 @@ export default function Login(){
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
-      </View> 
+    </View>    
+    
+    <Button 
+      title="New User?"
+      onPress={() => {
+        
+      }}></Button>
+
       <TouchableOpacity>
         <Text style={styles.forgot_button}>New User?</Text>
       </TouchableOpacity>
@@ -49,8 +56,8 @@ export default function Login(){
               myHeaders.append("Cookie", "JSESSIONID=0849CC59C6D4CF1F7D175E2F01DAA129");
 
               var urlencoded = new URLSearchParams();
-              urlencoded.append("username", email);
-              urlencoded.append("password", password);
+              urlencoded.append("username", "DemoUser");
+              urlencoded.append("password", "test123");
 
               var requestOptions = {
                 method: 'POST',
@@ -69,7 +76,8 @@ export default function Login(){
       </Button>
     </View>
   );
-        }
+}
+
  
  const styles = StyleSheet.create({
   container: {

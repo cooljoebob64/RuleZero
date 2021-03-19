@@ -5,6 +5,7 @@ import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom
 import {Icon} from 'react-native-elements';
 import Build from './Build';
 import Settings from './Settings';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
 
@@ -46,16 +47,16 @@ const TabNavigator=createMaterialBottomTabNavigator(
                 )
             }
             },
-            Settings:{screen:Settings,
-                navigationOptions:{
-                    tabBarLabel:'Settings',
-                    activeColor:'#ff0000',
-                    inactiveColor:'#000000',
-                    barStyle:{backgroundColor:'#67baf6'},
-                    tabBarIcon:()=>(
-                        <View>
-                            <Icon name={'settings'} size={25} style={{color:'#ff0000'}}/>
-                        </View>
+        Settings:{screen:Settings,
+            navigationOptions:{
+                tabBarLabel:'Settings',
+                activeColor:'#ff0000',
+                inactiveColor:'#000000',
+                barStyle:{backgroundColor:'#67baf6'},
+                tabBarIcon:()=>(
+                    <View>
+                        <Icon name={'settings'} size={25} style={{color:'#ff0000'}}/>
+                    </View>
                     )
                 }
     }
