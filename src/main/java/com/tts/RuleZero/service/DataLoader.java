@@ -39,6 +39,7 @@ public class DataLoader implements ApplicationRunner {
         roleRepository.save(new Role((long) 2, "ADMIN"));
 
         try {
+
         User demoUser = new User();
         demoUser.setId((long)1);
         demoUser.setUsername("DemoUser");
@@ -54,6 +55,7 @@ public class DataLoader implements ApplicationRunner {
         demoDeck.setDescription("This is a demo deck!");
         demoDeck.setColors("RU");
         deckService.save(demoDeck);
+
         } catch (NoSuchElementException e) {
             e.getStackTrace();
         }
