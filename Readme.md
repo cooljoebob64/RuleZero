@@ -48,10 +48,11 @@ https://reactnative.dev/img/header_logo.svg
 ## Status
 > This project is under development
 
-
 ## Features
 > F1:Implemented through a Third-party API
+> 
 > F2:Ability to use via online/mobile
+> 
 > F3:Possibly incorporate the IOS device at a later date and time
 
 
