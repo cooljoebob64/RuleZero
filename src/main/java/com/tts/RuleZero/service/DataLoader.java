@@ -34,20 +34,20 @@ public class DataLoader implements ApplicationRunner {
         roleRepository.save(new Role((long) 2, "ADMIN"));
 
         try {
-        User demoUser = new User();
-        demoUser.setId((long)1);
-        demoUser.setUsername("DemoUser");
-        demoUser.setEmail("demo@demo.demo");
-        demoUser.setPassword("test123");
-        demoUser.setActive(1);
-        userRepository.save(demoUser);
+            User demoUser = new User();
+            demoUser.setId((long)1);
+            demoUser.setUsername("DemoUser");
+            demoUser.setEmail("demo@demo.demo");
+            demoUser.setPassword("test123");
+            demoUser.setActive(1);
+            userRepository.save(demoUser);
 
 
-        Deck demoDeck = deckService.addNewDeck(demoUser);
-        demoDeck.setTitle("Demo Deck");
-        demoDeck.setDescription("This is a demo deck!");
-        demoDeck.setColors("RU");
-        deckService.save(demoDeck);
+            Deck demoDeck = deckService.addNewDeck(demoUser);
+            demoDeck.setTitle("Demo Deck");
+            demoDeck.setDescription("This is a demo deck!");
+            demoDeck.setColors("RU");
+            deckService.save(demoDeck);
         } catch (NoSuchElementException e) {
             e.getStackTrace();
         }
