@@ -11,14 +11,6 @@ of Magic: The Gathering with the organization and categorization of their constr
 * Ryan Kirk
 * Shantel Taylor
 
-## Table of contents:
-1.general info:
-2.image:
-3.software:
-4.setup:
-5.features:
-6.inspiration:
-
 ## Software used
 * Java
 * Spring Boot
