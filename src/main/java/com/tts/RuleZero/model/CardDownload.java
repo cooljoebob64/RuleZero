@@ -1,17 +1,30 @@
 package com.tts.RuleZero.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
+@Entity
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CardDownload {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "card_download_id")
     private String id;
+
+    @JsonProperty(value="id")
+    private String scryfallId;
+
     private String oracle_id;
     private int[] multiverse_ids;
     private int mtgo_id;
@@ -25,7 +38,10 @@ public class CardDownload {
     private String layout;
     private boolean highres_image;
     private String image_status;
-    private Object image_uris;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "card")
+    private UriList image_uris;
+
     private String mana_cost;
     private double cmc;
     private String type_line;
@@ -35,7 +51,7 @@ public class CardDownload {
     private String[] colors;
     private String[] color_identity;
     private String[] keywords;
-    private Object legalities;
+//    private Object legalities;
     private String[] games;
     private boolean reserved;
     private boolean foil;
@@ -67,9 +83,17 @@ public class CardDownload {
     private boolean booster;
     private boolean story_spotlight;
     private int edhrec_rank;
-    private Object preview;
-    private Object prices;
-    private Object related_uris;
-    private Object purchase_uris;
+//    private Object preview;
+//    private Object prices;
+//    private Object related_uris;
+//    private Object purchase_uris;
+
+    @UpdateTimestamp
+    private Date updatedAt;
+
+    @Override
+    public String toString(){
+        return name;
+    }
 
 }

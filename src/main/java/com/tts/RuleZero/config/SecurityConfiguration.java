@@ -52,6 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/custom.css").permitAll()
                 .antMatchers("/decks").permitAll()
                 .antMatchers("/decks/**").permitAll()
+                .antMatchers("/scry/**").permitAll()
                 .antMatchers().hasAuthority("USER").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")

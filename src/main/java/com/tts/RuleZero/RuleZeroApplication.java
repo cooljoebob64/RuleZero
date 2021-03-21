@@ -14,25 +14,25 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class RuleZeroApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(RuleZeroApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(RuleZeroApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(RuleZeroApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RuleZeroApplication.class, args);
+    }
 
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder){
-		return builder.build();
-	}
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
 
-	@Bean
-	public CommandLineRunner run(RestTemplate restTemplate) throws Exception{
-		return args -> {
-			CardDownload card = restTemplate.getForObject("https://api.scryfall.com/cards/0fe79ee4-c3f3-4a6b-a967-203ca3b70ee5", CardDownload.class);
-			log.info(card.toString());
-			log.info(card.getName());
-		};
-	}
+    @Bean
+    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+        return args -> {
+//            CardDownload card = restTemplate.getForObject("https://api.scryfall.com/cards/0fe79ee4-c3f3-4a6b-a967-203ca3b70ee5", CardDownload.class);
+//            log.info("Testing Scryfall API Connection:");
+//            log.info("Demo card name: " + card.getName());
+        };
+    }
 
 
 }

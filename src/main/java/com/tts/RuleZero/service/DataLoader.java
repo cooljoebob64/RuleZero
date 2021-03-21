@@ -9,7 +9,10 @@ import com.tts.RuleZero.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.NoSuchElementException;
 
@@ -17,14 +20,12 @@ import java.util.NoSuchElementException;
 public class DataLoader implements ApplicationRunner {
 
     private final RoleRepository roleRepository;
-    private final DeckRepository deckRepository;
     private final UserRepository userRepository;
     private final DeckService deckService;
 
     @Autowired
-    public DataLoader(RoleRepository roleRepository, DeckRepository deckRepository, UserRepository userRepository, DeckService deckService) {
+    public DataLoader(RoleRepository roleRepository, UserRepository userRepository, DeckService deckService) {
         this.roleRepository = roleRepository;
-        this.deckRepository = deckRepository;
         this.userRepository = userRepository;
         this.deckService = deckService;
     }
