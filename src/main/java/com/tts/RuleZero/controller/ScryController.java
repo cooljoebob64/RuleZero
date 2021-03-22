@@ -31,48 +31,20 @@ public class ScryController {
         String url = "https://api.scryfall.com/cards/search?q=" + q;
         String resp = restTemplate.getForObject(url, String.class);
 
-//        System.out.println("Our response: " + resp);
-
-
         List<CardDownload> cardList = new ArrayList<>();
         JsonParser springParser = JsonParserFactory.getJsonParser();
         List<Object> dataList =  (ArrayList)springParser.parseMap(resp).get("data");
-
-//
-//        System.out.println("Our data object: " + dataList.toString());
-//        System.out.println("First card result: " + dataList.get(0).toString());
 
         for(Object card: dataList){
             CardDownload thisCard = objectMapper.convertValue(card, CardDownload.class);
             System.out.println("This card: " + thisCard.toString());
             System.out.println("This card: " + thisCard.getId());
+            cardList.add(thisCard);
         }
 
-//        System.out.println("Our data object: " + map[3].getClass());
-//        cardList = (List)map[3];
-//
-//        int i = 0;
-//        for(Object card: cardList){
-//            System.out.println("Card number " + i + ": " + card["name"].toString());
-//            i++;
-//        }
-//        int i=0;
-//        for(Object card: springParser.parseList(map[3].toString())){
-//            System.out.println("Card number " + i + ": " + card.toString());
-//            i++;
-//        }
-
-
-//        if(map.size()>0) {
-//            int i = 0;
-//            for(Object card: map.){
-//                System.out.println(card.toString());
-//            }
-//
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if(cardList.size()>0){
+            return new ResponseEntity<>(cardList, HttpStatus.FOUND);
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(value="/card/{id}")
