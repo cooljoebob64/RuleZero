@@ -20,10 +20,10 @@ public class CardDownload {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "card_download_id")
-    private String id;
+    private String card_download_id;
 
     @JsonProperty(value="id")
-    private String scryfallId;
+    private String id;
 
     private String oracle_id;
     private int[] multiverse_ids;
