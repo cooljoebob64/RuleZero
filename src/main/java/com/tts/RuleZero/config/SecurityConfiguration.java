@@ -52,6 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/custom.css").permitAll()
                 .antMatchers("/decks").permitAll()
                 .antMatchers("/decks/**").permitAll()
+                .antMatchers("/scry/**").permitAll()
                 .antMatchers(
                         "/v2/api-docs",
                         "/swagger-resources/**",
