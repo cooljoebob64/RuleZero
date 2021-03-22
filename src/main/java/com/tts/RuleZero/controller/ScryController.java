@@ -53,7 +53,7 @@ public class ScryController {
         CardDownload card = restTemplate.getForObject("https://api.scryfall.com/cards/" + id, CardDownload.class);
 
 //        return new ResponseEntity<>(card, HttpStatus.FOUND);
-        return new ResponseEntity<>(HttpStatus.FOUND);
+        return new ResponseEntity<>(card, HttpStatus.FOUND);
 
     }
 }
